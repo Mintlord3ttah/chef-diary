@@ -145,7 +145,18 @@ background-color: #67bb8a;
   border-radius: 0 0.5rem 0.5rem 0;
 
 }
-
+.cstm-v-nav{
+  display: none;
+}
 .cstm-logo {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media (max-width: 900px) {
+  .cstm-h-nav{
+    display: none;
+  }
+  .cstm-v-nav{
+    display: block;
+  }
 }
