@@ -1,4 +1,4 @@
-import SearchRecipe from "../FEATURES/SEARCH/searchRecipe";
+import SearchRecipe from "../FEATURES/SEARCH/SearchRecipe";
 import Nav from "./Nav";
 
 export default function Home() {

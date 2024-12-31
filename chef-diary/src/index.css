@@ -23,8 +23,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: "Inter var", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* font-family: gabriola; */
+/* font-family: gabriola;  */
 }
 
 .cstm-home {
@@ -150,5 +149,3 @@ background-color: #67bb8a;
 .cstm-logo {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
-.cstm-nav {}
