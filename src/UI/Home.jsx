@@ -1,11 +1,21 @@
 import SearchRecipe from "../FEATURES/SEARCH/SearchRecipe";
 import { Toaster } from "react-hot-toast";
 import Nav from "./Nav";
+import Modal from "./Modal";
+import AuthForm from "./AuthForm";
+import { useAppProvider } from "../context/appProvider";
+import SearchResult from "./SearchResult";
 
 export default function Home() {
+    const {openModal, setFormType, formType, modalContent} = useAppProvider()
     const styleFlex = "flex items-center justify-center flex-col"
+
     return (
         <div className="cstm-home h-screen " >
+            <Modal>
+                {modalContent === "auth-form" && <AuthForm type={formType} />}
+                {modalContent === "search-results" && <SearchResult />}
+            </Modal>
             <Toaster />
             <p className="cstm-chef-co text-center text-xl ">Created with ❤️ by Mintlord3ttah - Chef Diary Recipes</p>
             <Nav />

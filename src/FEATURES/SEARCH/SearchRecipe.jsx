@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useAppProvider } from '../../context/appProvider';
 
 let timer = null;
 const defaultSearchStr = [
@@ -17,13 +18,16 @@ const defaultSearchStr = [
 
 export default function SearchRecipe() {
     const [index, setIndex] = React.useState(0);
+    const {setSearchResults} = useAppProvider()
     const randVal = defaultSearchStr[index]
 
     useEffect(() => {
         async function getRecipes() {
-            const data = await fetch("https://forkify-api.herokuapp.com/v2/recipes?search=pizza&key=f14e0dfd-46c7-4804-891e-dd5dc8ba229d");
+            // const data = await fetch("https://forkify-api.herokuapp.com/v2/recipes?search=pizza&key=f14e0dfd-46c7-4804-891e-dd5dc8ba229d");
+            const data = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza");
             const res = await data.json();
-            console.log(data)
+            setSearchResults(res.data.recipes)
+            console.log(res)
         }
 
         getRecipes()
@@ -42,12 +46,14 @@ export default function SearchRecipe() {
         return () => clearTimeout(timer)
     },[index])
 
-    console.log({index, defaultSearchStr: randVal})
 
 
-    return (<label htmlFor="" className="w-full flex shadow-2xl">
+    return (<label htmlFor="" className="w-full flex shadow-2xl bg-white p-1">
         <input className="search-field text-fade-animation text-2xl" type="text" value={randVal} />
-        <div className="cstm-search-btn w-52 h-full bg-green-950 flex items-center justify-center text-green-300 font-bold text-4xl">Search</div>
+        <div className="cstm-search-btn glow-button w-fit px-6 h-full bg-green-950 flex gap-4 items-center cursor-pointer justify-center text-green-300 font-bold text-4xl">
+            <ion-icon name="search-outline"></ion-icon>
+            <span> Search</span>
+            </div>
     </label>)
 }
 

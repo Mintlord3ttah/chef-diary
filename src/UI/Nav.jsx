@@ -52,7 +52,7 @@ export default function Nav() {
                     <p>/ { UIView.replace("-", " ")}</p>
                 </div>
                 <button onClick={()=>setOpenMobileNav(false)} className="text-5xl text-green-950 h-fit hover:text-white hover:bg-green-950 cursor p-1">&times;</button>
-                <button  className="dropdown-toggle absolute -bottom-6 left-1/2 text-3xl text-green-950 bg-white rounded-full size-12 flex items-center justify-center border border-green-500 hover:bg-green-200 cursor p-1">
+                <button  className="dropdown-toggle absolute -bottom-6 left-[45%]  text-3xl text-green-950 bg-white rounded-full size-12 flex items-center justify-center border border-green-500 hover:bg-green-200 cursor p-1">
                   <p className="dropdown-toggle absolute top-0 left-0 size-full z-10"></p>
                   <ion-icon  name={dropdown ? "chevron-up-outline" : "chevron-down-outline"}></ion-icon>
                 </button>

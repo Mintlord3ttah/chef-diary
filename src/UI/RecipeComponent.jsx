@@ -1,9 +1,9 @@
 
-export default function BookmarkedRecipe({
-  img, title, publisher, sourceUrl
+export default function RecipeComponent({
+  img, title, publisher, sourceUrl, useFor="bookmark"
 }) {
   return (
-    <div className='relative w-full group: flex flex-col gap-2 border-b-2 p-4 text-lg hover:bg-white transition-all duration-300'>
+    <div className={`relative w-full group cursor-pointer flex flex-col gap-2 border-b-2 p-4 text-lg ${useFor === "bookmark" ? "hover:bg-white" : "hover:bg-white/50"} transition-all duration-300`}>
       <div className='flex items-center gap-4'>
       <img src={img} alt={title} className='size-8' />
       <div className=' flex gap-6 items-center group'>

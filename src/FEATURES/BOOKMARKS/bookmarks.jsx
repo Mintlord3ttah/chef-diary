@@ -1,7 +1,7 @@
 import { useAppProvider } from "../../context/appProvider";
-import BookmarkedRecipe from "../../UI/bookmarkedRecipe";
+import RecipeComponent from "../../UI/RecipeComponent";
 
-const recipes = [
+export const recipes = [
     { id: 1, title: "Pizza", publisher: "Chef John", img: "https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg"
     },
     { id: 2, title: "Pasta", publisher: "Chef Jane", img: "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
@@ -23,7 +23,7 @@ export default function Bookmarks() {
                 ) : 
                 recipes.length > 0 ? (
                     recipes.map(recipe => (
-                        <BookmarkedRecipe key={recipe.id} {...recipe} />
+                        <RecipeComponent key={recipe.id} {...recipe} />
                     ))
                 ) : (
                     <div className="w-full flex flex-col items-center gap-4 p-4">

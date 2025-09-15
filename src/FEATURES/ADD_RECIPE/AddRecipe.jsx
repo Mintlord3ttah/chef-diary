@@ -68,7 +68,7 @@ export default function AddRecipe() {
 
 function InputHTML({ type = "text", placeholder = "" }) {
 
-    return <input className="cstm-input max-[420px]:w-full h-14 px-5" type={type} id="recipe-name" placeholder={placeholder} />
+    return <input className="cstm-input max-[420px]:w-full h-14 px-5" type={type} placeholder={placeholder} />
 }
 
 function IngredientItem({ itemNum, deleteItem }) {

@@ -136,8 +136,6 @@ background-color: #67bb8a;
   height: 6rem;
   border-radius: 0.5rem 0 0 0.5rem;
   padding: 0 2rem;
-  /* font-size: ; */
-  box-shadow: 0 0 0 0 #052e16;
 
   &::placeholder {
     color: #052e16;
@@ -175,8 +173,25 @@ background-color: #67bb8a;
 }
 
 .cstm-search-btn {
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0.5rem;
+  margin-left: 0;
+  animation: btn-slide 10s ease-in;
+  box-shadow: 0 0 1px #0b8b40, 0 0 5px #052e16, 0 0 10px #052e16;
+}
 
+.glow-button:hover {
+  box-shadow: 0 0 5px #0b8b40, 0 0 10px #052e16, 0 0 15px #052e16;
+}
+
+@keyframes btn-slide {
+  0% {
+    background-color: #052e16;
+    --tw-bg-opacity: 1;
+  }
+  100% {
+    background-color: #2b8050;
+    --tw-bg-opacity: 1;
+  }
 }
 .cstm-v-nav{
   display: none;

@@ -4,7 +4,7 @@ import { useAppProvider } from '../context/appProvider'
 export default function AuthForm({type="signin"}) {
     const {setFormType, formType} = useAppProvider()
   return <form className="relative pt-40 mt-16 flex flex-col gap-4 p-10 w-[35rem] bg-white shadow-xl border border-gray-300 ">
-        <div className="text-4xl w-[90%] h-40 absolute -top-[15%] left-1/2 transform -translate-x-1/2 text-green-50 flex flex-col gap-4 items-center justify-center font-semibold bg-green-950 rounded-lg text-center">
+        <div className="text-4xl w-[90%] border border-white h-40 absolute -top-[15%] left-1/2 transform -translate-x-1/2 text-green-50 flex flex-col gap-4 items-center justify-center font-semibold bg-green-950 rounded-lg text-center">
             <span className="">{type === "signin" ? "Welcome Back" : "Register"}</span>
             <p className="text-2xl">Please input your credentials</p>
         </div>
