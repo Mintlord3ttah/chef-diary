@@ -36,7 +36,7 @@ export default function AddRecipe() {
         })
     }
 
-    return <form action="" className="cstm-form-add-recipe bg-green-50 text-green-950">
+    return <form action="" className="cstm-form-add-recipe max-[420px]:w-full bg-green-50 shadow-xl text-green-950 text-2xl">
         <div className={`default-0 ${container} ${isNext ? "backward" : "default-0"}`}>
             <label htmlFor="recipe-image">RECIPE NAME
                 <InputHTML />
@@ -53,10 +53,12 @@ export default function AddRecipe() {
             <div className="cstm-ingredient-list flex flex-col gap-10">
                 {ingredientArr?.map((v, i) => <IngredientItem key={i} itemNum={i + 1} deleteItem={deleteItem} />)}
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 max-[420px]:grid grid-cols-2 grid-rows-2">
                 <Button onClick={handleNext}>Back &larr;</Button>
                 <Button onClick={handleAddRecipe}>+ Add</Button>
-                <Button onClick={handleSubmit}>Submmit</Button>
+                <div className="max-[420px]:col-span-2">
+                    <Button onClick={handleSubmit}>Submmit</Button>
+                </div>
             </div>
         </div>
     </form>
@@ -66,7 +68,7 @@ export default function AddRecipe() {
 
 function InputHTML({ type = "text", placeholder = "" }) {
 
-    return <input className="cstm-input h-14 px-5" type={type} id="recipe-name" placeholder={placeholder} />
+    return <input className="cstm-input max-[420px]:w-full h-14 px-5" type={type} id="recipe-name" placeholder={placeholder} />
 }
 
 function IngredientItem({ itemNum, deleteItem }) {

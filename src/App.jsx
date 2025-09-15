@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Home from "./UI/Home"
+import { AppProviderContext } from "./context/appProvider"
 
 const router = createBrowserRouter([
   {
@@ -7,10 +8,11 @@ const router = createBrowserRouter([
     element: <Home />,
   }
 ])
-
 function App() {
 
-  return <RouterProvider router={router} />
+  return <AppProviderContext>
+    <RouterProvider router={router} />
+  </AppProviderContext>
 }
 
 export default App

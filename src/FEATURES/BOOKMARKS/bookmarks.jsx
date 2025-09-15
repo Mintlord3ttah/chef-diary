@@ -1,3 +1,4 @@
+import { useAppProvider } from "../../context/appProvider";
 import BookmarkedRecipe from "../../UI/bookmarkedRecipe";
 
 const recipes = [
@@ -10,9 +11,10 @@ const recipes = [
 ]
 
 export default function Bookmarks() {
+    const {setUIView} = useAppProvider()
     const isAuthenticated = true;
   return (
-    <div className="w-[30rem] text-lg flex flex-col items-center text-green-950 bg-green-50 font-semibold">
+    <div className="w-[30rem] max-[900px]:w-full text-lg flex flex-col items-center text-green-950 bg-green-50 font-semibold">
                 {!isAuthenticated ? (
                     <div className="w-full flex flex-col items-center gap-4 p-4">
                         <p className='font-bold text-lg'>Your Bookmarked Recipes</p>
