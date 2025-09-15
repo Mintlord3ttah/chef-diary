@@ -10,7 +10,7 @@ export default function Modal({children}) {
         }
     }
   return (
-    <div onClick={handleCloseModal} className={`modal ${openModal ? 'block' : 'hidden'} fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50`}>
+    <div onClick={handleCloseModal} className={`modal ${openModal ? 'block' : 'hidden'} px-4 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50`}>
       {children}
     </div>
   )
