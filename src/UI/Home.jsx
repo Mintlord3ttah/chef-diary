@@ -7,7 +7,7 @@ import { useAppProvider } from "../context/appProvider";
 import SearchResult from "./SearchResult";
 
 export default function Home() {
-    const {openModal, setFormType, formType, modalContent} = useAppProvider()
+    const {formType, modalContent} = useAppProvider()
     const styleFlex = "flex items-center justify-center flex-col"
 
     return (

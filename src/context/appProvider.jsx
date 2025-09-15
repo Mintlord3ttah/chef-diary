@@ -7,9 +7,23 @@ function AppProviderContext({children}){
     const [openMobileNav, setOpenMobileNav] = useState(true)
     const [UIView, setUIView] = useState("account") // for mobile nav views
     const [dropdown, setDropdown] = useState(false)
-    const [openModal, setOpenModal] = useState(true)
-    const [modalContent, setModalContent] = useState("search-results") // "auth-form" | search-results - auto
+    const [openModal, setOpenModal] = useState(false)
+    const [modalContent, setModalContent] = useState("") // "auth-form" | search-results - auto
     const [searchResults, setSearchResults] = useState([])
+    const [searchStr, setSearchStr] = useState("");
+    const [inputFocus, setInputFocus] = useState(false);
+
+
+    function handleInputFocus(e){
+            e.preventDefault();
+            setSearchStr("")
+            setInputFocus(true)
+        }
+        function handleInputBlur(e){
+            e.preventDefault();
+            setInputFocus(false)
+        }
+
 
     return <Context.Provider value={{
         formType, 
@@ -25,7 +39,12 @@ function AppProviderContext({children}){
         modalContent,
         setModalContent,
         setSearchResults,
-        searchResults
+        searchResults,
+        searchStr,
+        setSearchStr,
+        handleInputBlur,
+        handleInputFocus,
+        inputFocus
     }}>
         {children}
     </Context.Provider>

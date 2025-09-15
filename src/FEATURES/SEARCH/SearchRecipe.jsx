@@ -19,12 +19,23 @@ const defaultSearchStr = [
 export default function SearchRecipe() {
     const [index, setIndex] = React.useState(0);
     const {setSearchResults} = useAppProvider()
+    const { setModalContent, setOpenModal, searchStr, setSearchStr, handleInputBlur,
+        handleInputFocus, inputFocus } = useAppProvider()
     const randVal = defaultSearchStr[index]
+
+    function handleSearch(e){
+        e.preventDefault();
+        setSearchStr(e.target.value)
+        if(searchStr.length < 3 || !inputFocus) return;
+        setModalContent("search-results")
+        setOpenModal(true)
+    }
 
     useEffect(() => {
         async function getRecipes() {
+            if(searchStr.length < 3) return;
             // const data = await fetch("https://forkify-api.herokuapp.com/v2/recipes?search=pizza&key=f14e0dfd-46c7-4804-891e-dd5dc8ba229d");
-            const data = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza");
+            const data = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes?search="+searchStr);
             const res = await data.json();
             setSearchResults(res.data.recipes)
             console.log(res)
@@ -35,6 +46,7 @@ export default function SearchRecipe() {
 
     useEffect(()=>{
         function changeIndex() {
+            if(inputFocus) return;
             const randomIndex = Math.floor(Math.random() * defaultSearchStr.length);
             timer = setTimeout(() => {
                 console.log({randomIndex})
@@ -42,14 +54,15 @@ export default function SearchRecipe() {
             }, 10000)
         }
         
+        !inputFocus && setSearchStr(randVal)
         changeIndex()
-        return () => clearTimeout(timer)
-    },[index])
+        return () => inputFocus && clearTimeout(timer)
+    },[index, searchStr, inputFocus])
 
 
 
     return (<label htmlFor="" className="w-full flex shadow-2xl bg-white p-1">
-        <input className="search-field text-fade-animation text-2xl" type="text" value={randVal} />
+        <input onFocus={handleInputFocus} onBlur={handleInputBlur} onChange={handleSearch} className="search-field text-fade-animation text-2xl" type="text" value={searchStr} />
         <div className="cstm-search-btn glow-button w-fit px-6 h-full bg-green-950 flex gap-4 items-center cursor-pointer justify-center text-green-300 font-bold text-4xl">
             <ion-icon name="search-outline"></ion-icon>
             <span> Search</span>

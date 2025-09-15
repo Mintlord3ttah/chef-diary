@@ -1,6 +1,6 @@
 
 export default function RecipeComponent({
-  img, title, publisher, sourceUrl, useFor="bookmark"
+  img, title, publisher, sourceUrl, useFor="bookmark", bookmarked=false
 }) {
   return (
     <div className={`relative w-full group cursor-pointer flex flex-col gap-2 border-b-2 p-4 text-lg ${useFor === "bookmark" ? "hover:bg-white" : "hover:bg-white/50"} transition-all duration-300`}>
@@ -9,9 +9,15 @@ export default function RecipeComponent({
       <div className=' flex gap-6 items-center group'>
         <h3 className="text-xl font-bold">{title}</h3>
         <span className="font-medium text-gray-500">14/09/25</span>
+        {useFor === "search" ? 
+        bookmarked ? 
+        <div className="text-2xl transition-all duration-300 text-green-600 p-1 hover:bg-green-100"><ion-icon name="bookmark"></ion-icon></div> :
+        <div className="group-[&:hover]:opacity-100 text-2xl opacity-0 transition-all duration-300 text-green-600 p-1 hover:bg-green-100">
+        <ion-icon name="bookmark-outline" ></ion-icon>
+        </div> :
         <p className="group-[&:hover]:opacity-100 opacity-0 transition-all duration-300 text-red-600 text-xl p-1 hover:bg-red-100">
         <ion-icon name="trash-outline" ></ion-icon>
-        </p>
+        </p>}
       </div>
       </div>
       <p>Publisher: <ion-icon name="person-outline"></ion-icon> {publisher}</p>
