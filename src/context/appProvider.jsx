@@ -24,6 +24,11 @@ function AppProviderContext({children}){
             setInputFocus(false)
         }
 
+    function handleForm(type){
+        setFormType(type)
+        setOpenModal(true)
+        setModalContent("auth-form")
+    }
 
     return <Context.Provider value={{
         formType, 
@@ -44,7 +49,8 @@ function AppProviderContext({children}){
         setSearchStr,
         handleInputBlur,
         handleInputFocus,
-        inputFocus
+        inputFocus,
+        handleForm
     }}>
         {children}
     </Context.Provider>

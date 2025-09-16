@@ -2,6 +2,13 @@ import { useState } from "react"
 import Button from "../../UI/Button"
 import toast from "react-hot-toast";
 
+export const style = {
+    borderRadius: '10px',
+    background: '#fff',
+    color: '#14532d',
+    fontSize: '1.6rem',
+}
+
 export default function AddRecipe() {
     const isAuthenticated = false
     const [isNext, setIsNext] = useState(false);
@@ -27,12 +34,7 @@ export default function AddRecipe() {
         e.preventDefault();
         // Handle form submission logic here
         if (!isAuthenticated) return toast("You need to be signed in to add a recipe", {
-            style: {
-                borderRadius: '10px',
-                background: '#fff',
-                color: '#14532d',
-                fontSize: '1.6rem',
-            }
+            style: style
         })
     }
 

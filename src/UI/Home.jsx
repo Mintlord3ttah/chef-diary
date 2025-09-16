@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import AuthForm from "./AuthForm";
 import { useAppProvider } from "../context/appProvider";
 import SearchResult from "./SearchResult";
+import ClerkTemp from "./ClerkTemp";
 
 export default function Home() {
     const {formType, modalContent} = useAppProvider()
@@ -15,6 +16,7 @@ export default function Home() {
             <Modal>
                 {modalContent === "auth-form" && <AuthForm type={formType} />}
                 {modalContent === "search-results" && <SearchResult />}
+                {/* <ClerkTemp /> */}
             </Modal>
             <Toaster />
             <p className="cstm-chef-co text-center text-xl ">Created with ❤️ by Mintlord3ttah - Chef Diary Recipes</p>

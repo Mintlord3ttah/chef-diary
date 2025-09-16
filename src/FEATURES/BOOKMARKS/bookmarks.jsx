@@ -1,3 +1,4 @@
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import { useAppProvider } from "../../context/appProvider";
 import RecipeComponent from "../../UI/RecipeComponent";
 
@@ -11,26 +12,31 @@ export const recipes = [
 ]
 
 export default function Bookmarks() {
-    const {setUIView} = useAppProvider()
-    const isAuthenticated = true;
+    const {setUIView, handleForm} = useAppProvider()
+    const isAuthenticated = false;
   return (
     <div className="w-[30rem] max-[900px]:w-full text-lg flex flex-col items-center text-green-950 bg-green-50 font-semibold">
-                {!isAuthenticated ? (
-                    <div className="w-full flex flex-col items-center gap-4 p-4">
-                        <p className='font-bold text-lg'>Your Bookmarked Recipes</p>
-                        <p className=' text-center'>You can view your favorite recipes here.</p>
-                    </div>
-                ) : 
-                recipes.length > 0 ? (
-                    recipes.map(recipe => (
-                        <RecipeComponent key={recipe.id} {...recipe} />
-                    ))
-                ) : (
-                    <div className="w-full flex flex-col items-center gap-4 p-4">
-                        <p className='font-bold text-lg'>No Bookmarks Yet!</p>
-                        <p className=' text-center'>You can bookmark your favorite recipes to access them quickly later.</p>
-                    </div>
-                )}
+        <SignedOut>
+            <div className="w-full flex flex-col items-center gap-4 p-4 text-xl">
+                <p className='font-bold text-2xl'>Your Bookmarked Recipes</p>
+                <p className=' text-center'>You can view your favorite recipes here.</p>
+                <button onClick={()=>handleForm("signin")} className="cstm-search-btn mt-6 glow-button w-fit px-6 py-3 h-full bg-green-950 flex gap-4 items-center cursor-pointer justify-center text-green-100 font-bold text-xl">
+                    SIGN IN TO VIEW
+                    <ion-icon name="log-in-outline"></ion-icon>
+                </button>
+            </div>
+        </SignedOut>
+        <SignedIn>
+            { recipes.length > 0 ?
+            recipes.map(recipe => (
+                <RecipeComponent key={recipe.id} {...recipe} />
+            )) :
+            <div className="w-full flex flex-col items-center gap-4 p-4">
+                <p className='font-bold text-lg'>No Bookmarks Yet!</p>
+                <p className=' text-center'>You can bookmark your favorite recipes to access them quickly later.</p>
+            </div> }  
+        </SignedIn>
     </div>
+
   )
 }

@@ -6,6 +6,7 @@ import Bookmarks from "../FEATURES/BOOKMARKS/bookmarks";
 import AuthForm from "./AuthForm";
 import { useAppProvider } from "../context/appProvider";
 import MiniNavItems from "./MobileListItemNav";
+import { UserButton } from "@clerk/clerk-react";
 
 export default function Nav() {
     const {formType, openMobileNav, 
@@ -39,6 +40,10 @@ export default function Nav() {
                 <NavListItem dropDown={true} height={"group-hover:h-[31rem]"} component={<AddRecipe />}>ADD RECIPE</NavListItem>
                 <NavListItem dropDown={true} height={"group-hover:h-[10rem]"} component={<Account />}>ACCOUNT</NavListItem>
                 <NavListItem dropDown={true}>LEARN MORE</NavListItem>
+                {/* <NavListItem><UserButton /></NavListItem> */}
+                {/* <div className="clerk-wrapper isolate "><UserButton appearance={{variables: {fontSize: "100%" }}} /></div> */}
+                <UserButton />
+                
             </ul>
             <button onClick={()=>setOpenMobileNav(true)} className="text-5xl text-white hover:bg-green-950 cursor p-1 max-[900px]:block hidden"><ion-icon name="grid-outline"></ion-icon></button>
 

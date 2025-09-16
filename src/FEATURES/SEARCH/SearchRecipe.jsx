@@ -49,7 +49,6 @@ export default function SearchRecipe() {
             if(inputFocus) return;
             const randomIndex = Math.floor(Math.random() * defaultSearchStr.length);
             timer = setTimeout(() => {
-                console.log({randomIndex})
                 setIndex(randomIndex)
             }, 10000)
         }
