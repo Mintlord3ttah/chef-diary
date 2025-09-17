@@ -7,6 +7,25 @@ import toast from 'react-hot-toast'
 import { style } from '../FEATURES/ADD_RECIPE/AddRecipe'
 import Logo from './Logo'
 
+const ERRORS = {
+    email: {
+        invalid: "Invalid email",
+        empty: "Email is required",
+    },
+    password: {
+        invalid: "Password must be 8 characters long",
+        empty: "Password is required"
+    },
+    username: {
+        invalid: "Name must be more than 3 characters",
+        empty: "Please provide a user name"
+    },
+    code: {
+        invalid: "Please enter a valid 6 digit code",
+        empty: "Please enter a valid 6 digit code"
+    }
+}
+
 export default function AuthForm({type="signin"}) {
     const {setFormType, formType} = useAppProvider()
     const [email, setEmail] = useState("")
@@ -18,17 +37,23 @@ export default function AuthForm({type="signin"}) {
 
     async function handleFormSubmit(e){
         e.preventDefault(); 
-        const checkSigninInputs = email !== "" && password !== ""
-        const checkSignupInputs = email !== "" && password !== "" && username.length > 3
-        const checkCodeInput = code.length === 6
+        const emailCheck = email.length <= 0 &&  "empty" || ""
+        const passwordCheck = password.length > 0 && password.length < 8 && "invalid" || password.length <= 0 &&  "empty" || ""
+        const usernamesCheck = username.length > 0 && username.length < 4 && "invalid" || username.length <= 0 &&  "empty" || ""
+        const codeCheck = code.length > 0 && code.length < 6 && "invalid" || code.length <= 0 &&  "empty" || ""
+
+        if(type === "signup" && usernamesCheck.length > 0) return toast.error(ERRORS.username[usernamesCheck], {style: style})
+        if(type !== "code" && emailCheck.length > 0) return toast.error(ERRORS.email[emailCheck], {style: style})
+        if(type !== "code" && passwordCheck.length > 0) return toast.error(ERRORS.password[passwordCheck], {style: style})
+        if(type === "code" && codeCheck.length > 0) return toast.error(ERRORS.code[codeCheck], {style: style})
 
         switch(type){
             case "signin":
-                return checkSigninInputs ? await onSignIn() : toast.error("Please fill all fields", {style: style})
+                return await onSignIn() 
             case "signup":
-                return checkSignupInputs ? await onSignUp() : toast.error("Please input a valid email address, names exceeding 3 characters", {style: style})
+                return await onSignUp() 
             case "code":
-                return checkCodeInput ? await onVerify({code}) : toast.error("Please enter a valid 6 digit code", {style: style})    
+                return await onVerify({code}) 
             default:
                 return;
         }
@@ -37,7 +62,7 @@ export default function AuthForm({type="signin"}) {
     useEffect(()=>{pending && setFormType("code")},[pending])
 
   return <form onSubmit={handleFormSubmit} className="relative pt-32 mt-16 flex flex-col gap-4 p-10 w-[35rem] bg-white shadow-xl border border-gray-300 ">
-        <div className="text-4xl w-[90%] border border-white h-40 absolute -top-[15%] left-1/2 transform -translate-x-1/2 text-green-50 flex flex-col gap-4 items-center justify-center font-semibold bg-green-950 rounded-lg text-center">
+        <div className="text-4xl w-[90%] border border-white h-40 absolute -top-[15%] left-1/2 transform -translate-x-1/2 text-green-50 flex flex-col gap-4 items-center justify-center font-semibold bg-green-800 rounded-lg text-center">
             <span className="">{type === "signin" ? "Welcome Back" :  type === "signup" ? "Register" : "Verify Email"}</span>
             <p className="text-2xl">{type === "code" ? "Please enter the code sent to your email" : "Please input your credentials"}</p>
         </div>
@@ -50,7 +75,7 @@ export default function AuthForm({type="signin"}) {
             <Input value={email} onChange={setEmail} type="email" placeholder="example@gmail.com" />
             <Input value={password} onChange={setPassword} type="password" placeholder="password" />
         </>}
-        <input  type="submit" value={type === "signin" ? "SIGN IN" : type === "signup" ? "REGISTER" : "VERIFY"} className="border border-gray-300 rounded-lg font-bold py-6 text-xl mt-4 bg-green-950 text-green-50 hover:bg-green-700 cursor-pointer" />
+        <input  type="submit" value={type === "signin" ? "SIGN IN" : type === "signup" ? "REGISTER" : "VERIFY"} className="border border-gray-300 rounded-lg font-bold py-6 text-xl mt-4 bg-green-800 text-green-50 hover:bg-green-700 cursor-pointer" />
         <div className='flex justify-center w-full text-xl mt-4'>
             <p>{type === "signin" ? <span>Don't have an account ? 
                 <span onClick={()=>setFormType("signup")} className='text-green-600 font-bold cursor-pointer '> Register</span></span> :

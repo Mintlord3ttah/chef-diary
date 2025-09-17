@@ -5,7 +5,6 @@ import Modal from "./Modal";
 import AuthForm from "./AuthForm";
 import { useAppProvider } from "../context/appProvider";
 import SearchResult from "./SearchResult";
-import ClerkTemp from "./ClerkTemp";
 
 export default function Home() {
     const {formType, modalContent} = useAppProvider()

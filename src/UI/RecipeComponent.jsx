@@ -1,9 +1,11 @@
+import { useAppProvider } from "../context/appProvider"
 
 export default function RecipeComponent({
-  img, title, publisher, sourceUrl, useFor="bookmark", bookmarked=false
+  img, title, publisher, sourceUrl, useFor="bookmark", bookmarked=false, onClick
 }) {
+  const {selectedRecipe} = useAppProvider()
   return (
-    <div className={`relative w-full group cursor-pointer flex flex-col gap-2 border-b-2 p-4 text-lg ${useFor === "bookmark" ? "hover:bg-white" : "hover:bg-white/50"} transition-all duration-300`}>
+    <div onClick={onClick} className={`relative ${selectedRecipe?.title === title && "bg-green-700"} w-full group cursor-pointer flex flex-col gap-2 border-b-2 p-4 text-lg ${useFor === "bookmark" ? "hover:bg-white text-black" : "hover:bg-green-50"} transition-all duration-300`}>
       <div className='flex items-center gap-4'>
       <img src={img} alt={title} className='size-8' />
       <div className=' flex gap-6 items-center group'>
@@ -11,8 +13,8 @@ export default function RecipeComponent({
         <span className="font-medium text-gray-500">14/09/25</span>
         {useFor === "search" ? 
         bookmarked ? 
-        <div className="text-2xl transition-all duration-300 text-green-600 p-1 hover:bg-green-100"><ion-icon name="bookmark"></ion-icon></div> :
-        <div className="group-[&:hover]:opacity-100 text-2xl opacity-0 transition-all duration-300 text-green-600 p-1 hover:bg-green-100">
+        <div className="text-2xl transition-all duration-300 text-green-600 size-8 hover:bg-green-200 flex items-center justify-center"><ion-icon name="bookmark"></ion-icon></div> :
+        <div className="group-[&:hover]:opacity-100 text-2xl opacity-0 transition-all duration-300 text-green-600 size-8 hover:bg-green-200 flex items-center justify-center">
         <ion-icon name="bookmark-outline" ></ion-icon>
         </div> :
         <p className="group-[&:hover]:opacity-100 opacity-0 transition-all duration-300 text-red-600 text-xl p-1 hover:bg-red-100">

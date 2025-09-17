@@ -12,12 +12,15 @@ function AppProviderContext({children}){
     const [searchResults, setSearchResults] = useState([])
     const [searchStr, setSearchStr] = useState("");
     const [inputFocus, setInputFocus] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
+    const [selectedRecipe, setSelectedRecipe] = useState(null);
 
 
-    function handleInputFocus(e){
-            e.preventDefault();
-            setSearchStr("")
+
+    function handleInputFocus(e, clear=true){
+            clear && setSearchStr("")
             setInputFocus(true)
+            setSelectedRecipe(null)
         }
         function handleInputBlur(e){
             e.preventDefault();
@@ -50,7 +53,11 @@ function AppProviderContext({children}){
         handleInputBlur,
         handleInputFocus,
         inputFocus,
-        handleForm
+        handleForm,
+        isTyping,
+        setIsTyping,
+        selectedRecipe,
+        setSelectedRecipe
     }}>
         {children}
     </Context.Provider>

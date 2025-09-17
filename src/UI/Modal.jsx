@@ -2,11 +2,13 @@ import React from 'react'
 import { useAppProvider } from '../context/appProvider'
 
 export default function Modal({children}) {
-    const {openModal, setOpenModal} = useAppProvider()
+    const {openModal, setOpenModal, setSelectedRecipe, setIsTyping} = useAppProvider()
 
     function handleCloseModal(e){
         if(e.target.classList.contains("modal")){
             setOpenModal(false)
+            setSelectedRecipe(null)
+            setIsTyping(false)
         }
     }
   return (
