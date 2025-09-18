@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Button from "../../UI/Button"
 import toast from "react-hot-toast";
+import { useAppProvider } from "../../context/appProvider";
 
 export const style = {
     borderRadius: '10px',
@@ -11,8 +12,11 @@ export const style = {
 
 export default function AddRecipe() {
     const isAuthenticated = false
+    const {setOpenModal, openModal, setModalContent} = useAppProvider()
     const [isNext, setIsNext] = useState(false);
     const [ingredientArr, setIngredientArr] = useState([<IngredientItem />])
+    const left = "right-[50%] translate-x-[-5%]"
+    const right = "left-[15%] translate-x-[50%]"
 
     const container = "recipe-source-info flex p-10 flex-col gap-7"
     function handleNext(e) {
@@ -38,7 +42,19 @@ export default function AddRecipe() {
         })
     }
 
-    return <form action="" className="cstm-form-add-recipe max-[420px]:w-full bg-green-50 shadow-xl text-green-950 text-2xl">
+    function handleOpenModal(){
+        setOpenModal(!openModal)
+        setModalContent("modal-add-recipe")
+    }
+
+    return <div className="bg-green-50 flex flex-col gap-4 ">
+        <div className="flex justify-end mt-4 mr-4 gap-8">
+            <p className="text-2xl text-green-800">modal </p>
+            <div onClick={handleOpenModal} className={`relative ${openModal && "bg-green-200"} rounded-full w-20 h-8 bg-inherit border border-green-800 cursor transition-all duration-500`}>
+                <div className={`absolute top-[50%] translate-y-[-50%] ${openModal ? right : left} ${openModal && "bg-green-900"} transition-all duration-300 bg-green-50 inset-0 rounded-full size-11 border border-green-800`}></div>
+            </div>
+        </div>
+    <form action="" className="cstm-form-add-recipe max-[420px]:w-full z-50 shadow-xl text-green-950 text-2xl">
         <div className={`default-0 ${container} ${isNext ? "backward" : "default-0"}`}>
             <label htmlFor="recipe-image">RECIPE NAME
                 <InputHTML />
@@ -64,6 +80,7 @@ export default function AddRecipe() {
             </div>
         </div>
     </form>
+    </div>
 }
 
 

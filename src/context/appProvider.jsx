@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
 const Context = createContext()
-//UIV =  "bookmarks" | "add-recipe"| "account" | "learn-more" 
+//UIV =  "bookmarks" | "add-recipe"| "account" | "categories" | "modal-add-recipe"
 function AppProviderContext({children}){
     const [formType, setFormType] = useState("signin") // signin or signup
     const [openMobileNav, setOpenMobileNav] = useState(true)

@@ -186,6 +186,9 @@ background-color: #67bb8a;
 .glow-button:hover {
   box-shadow: 0 0 5px #0b8b40, 0 0 10px #052e16, 0 0 15px #052e16;
 }
+.add-recipe-button {
+  box-shadow: 0 0 5px #f0dada, 0 0 10px #bd8585, 0 0 15px #b36b6b;
+}
 
 @keyframes btn-slide {
   0% {

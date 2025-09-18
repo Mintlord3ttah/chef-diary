@@ -8,15 +8,16 @@ import { useAppProvider } from "../context/appProvider";
 import MiniNavItems from "./MobileListItemNav";
 import { UserButton, useSession } from "@clerk/clerk-react";
 import Categories from "../FEATURES/CATEGORIES/Categories";
+import BtnCreateRecipe from "./BtnCreateRecipe";
 
 export default function Nav() {
     const {session} = useSession()
     const {formType, openMobileNav, 
         setOpenMobileNav, dropdown, 
-        setDropdown,
-        UIView,
+        setDropdown, openModal, 
+        setModalContent,
+        UIView, setOpenModal
     } = useAppProvider()
-    const cursor = "hover:bg-green-950 cursor"
 
     const mobileUIViews = {
         "bookmarks": <Bookmarks />,
@@ -27,16 +28,17 @@ export default function Nav() {
 
     function handleDropDown(e){
         const target = e.target.classList.contains("dropdown-toggle")
-        console.log({target});
         target ? setDropdown(!dropdown) : setDropdown(false)
     }
+
     return (
         <>
         <nav className="cstm-nav text-2xl text-green-100 bg-green-900 flex flex-row p-10 justify-between items-center">
             <Logo />
             <ul className="cstm-h-nav flex flex-row gap-6 font-semibold">
+                <BtnCreateRecipe />
                 <NavListItem dropDown={true} height="group-hover:h-[40rem]" component={<Bookmarks />}>BOOKMARK</NavListItem>
-                <NavListItem dropDown={true} height={"group-hover:h-[31rem]"} component={<AddRecipe />}>ADD RECIPE</NavListItem>
+                {/* <NavListItem dropDown={true} height={"group-hover:h-[35rem]"} component={<AddRecipe />}>ADD RECIPE</NavListItem> */}
                 <NavListItem dropDown={true} height={"group-hover:h-[10rem]"} component={<Account />}>ACCOUNT</NavListItem>
                 <NavListItem dropDown={true} height={"group-hover:h-[25rem]"} component={<Categories />}>CATEGORIES</NavListItem>
                 <UserButton />
@@ -60,15 +62,16 @@ export default function Nav() {
                   <ion-icon  name={dropdown ? "chevron-up-outline" : "chevron-down-outline"}></ion-icon>
                 </button>
             </div>
-            <ul className={` text-xl flex flex-col ${dropdown ? " h-[19rem] mt-10" : "h-0 mt-0"} font-semibold transition-all duration-500  overflow-hidden`}>
+            <ul className={` text-xl flex gap-4 flex-col ${dropdown ? " h-[22rem] mt-10" : "h-0 mt-0"} font-semibold transition-all duration-500  overflow-hidden`}>
+                <BtnCreateRecipe />
                 <MiniNavItems ui="bookmarks" iconName={"bookmarks-outline"} text={"BOOKMARK"} />
-                <MiniNavItems ui="add-recipe" iconName={"add-circle-outline"} text={"ADD RECIPE"} />
+                {/* <MiniNavItems ui="add-recipe" iconName={"add-circle-outline"} text={"ADD RECIPE"} /> */}
                 <MiniNavItems ui="categories" iconName={"help-circle-outline"} text={"CATEGORIES"} />
                 <MiniNavItems ui="account" iconName={"person-circle-outline"} text={"ACCOUNT"} />
             </ul>
           </div>
 
-          <section className="flex-1">
+          <section onClick={(e) => e.target.classList.contains("flex-1") && setOpenMobileNav(false)} className="flex-1">
             <div className="max-w-[70rem] mx-auto mt-16 flex items-center justify-center p-10">
               {mobileUIViews[UIView]}
             </div>
@@ -77,14 +80,5 @@ export default function Nav() {
         </>
 
     )
-}
-
-function DropDownIcon() {
-    return (
-        <span className="text-xl">
-            <ion-icon name="chevron-down-outline"></ion-icon>
-        </span>
-    )
-
 }
 

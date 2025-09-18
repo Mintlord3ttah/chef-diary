@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import AuthForm from "./AuthForm";
 import { useAppProvider } from "../context/appProvider";
 import SearchResult from "./SearchResult";
+import ModalAddRecipe from "./modalAddRecipe";
 
 export default function Home() {
     const {formType, modalContent} = useAppProvider()
@@ -15,6 +16,7 @@ export default function Home() {
             <Modal>
                 {modalContent === "auth-form" && <AuthForm type={formType} />}
                 {modalContent === "search-results" && <SearchResult />}
+                {modalContent === "modal-add-recipe" && <ModalAddRecipe />}
                 {/* <ClerkTemp /> */}
             </Modal>
             <Toaster />
