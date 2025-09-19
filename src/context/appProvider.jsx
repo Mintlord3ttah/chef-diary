@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import IngredientItem from "../UI/IngredientItem";
 
 const Context = createContext()
 //UIV =  "bookmarks" | "add-recipe"| "account" | "categories" | "modal-add-recipe"
@@ -14,8 +15,12 @@ function AppProviderContext({children}){
     const [inputFocus, setInputFocus] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
-
-
+    const [ingredientValues, setIngredientValues] = useState("") // per input
+    const [recipeIngredients, setRecipeIngredients] = useState([]) // all ingredient values
+    const [ingredientArr, setIngredientArr] = useState([{id: crypto.randomUUID(), component: <IngredientItem />}])
+    const [deleteLastIngredient, setDeleteLastIngredient] = useState([false])
+    const [files, setFiles] = useState([]); // for photo upload
+    
 
     function handleInputFocus(e, clear=true){
             clear && setSearchStr("")
@@ -57,7 +62,17 @@ function AppProviderContext({children}){
         isTyping,
         setIsTyping,
         selectedRecipe,
-        setSelectedRecipe
+        setSelectedRecipe,
+        ingredientValues,
+        setIngredientValues,
+        recipeIngredients,
+        setRecipeIngredients,
+        ingredientArr,
+        setIngredientArr,
+        setDeleteLastIngredient,
+        deleteLastIngredient,
+        files,
+        setFiles
     }}>
         {children}
     </Context.Provider>

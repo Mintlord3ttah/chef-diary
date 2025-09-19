@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useAppProvider } from '../../context/appProvider';
 import { style } from '../ADD_RECIPE/AddRecipe';
+import toast from 'react-hot-toast';
 
 let timer = null;
 const defaultSearchStr = [
@@ -41,7 +42,7 @@ export default function SearchRecipe() {
     useEffect(() => {
         async function getRecipes() {
             // setSearchResults([]);
-            if(searchStr.length < 3 && isTyping) return;
+            if(searchStr.length < 3 || !isTyping) return;
             // const data = await fetch("https://forkify-api.herokuapp.com/v2/recipes?search=pizza&key=f14e0dfd-46c7-4804-891e-dd5dc8ba229d");
             try{
                 const data = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes?search="+searchStr);

@@ -186,8 +186,15 @@ background-color: #67bb8a;
 .glow-button:hover {
   box-shadow: 0 0 5px #0b8b40, 0 0 10px #052e16, 0 0 15px #052e16;
 }
-.add-recipe-button {
-  box-shadow: 0 0 5px #f0dada, 0 0 10px #bd8585, 0 0 15px #b36b6b;
+.add-recipe-button:hover {
+  box-shadow: 0 0 5px #daf0de, 0 0 10px #85bd96, 0 0 15px #6bb37b;
+}
+
+._transition{
+  transition: transform 0.5s ease;
+}
+.overflow-hide{
+  overflow: hidden;
 }
 
 @keyframes btn-slide {
