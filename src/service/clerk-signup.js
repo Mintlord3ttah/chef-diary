@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { useSignUp } from '@clerk/clerk-react'
 import { useAppProvider } from '../context/appProvider'
+import toast from 'react-hot-toast'
+import { style } from '../FEATURES/ADD_RECIPE/AddRecipe'
 
 export default function useSignUpClerk({email, password, username}) {
   const { isLoaded, signUp, setActive } = useSignUp()
+  const [loading, setLoading] = useState(false)
   const [pendingVerification, setPendingVerification] = useState(false)
   const {setOpenModal} = useAppProvider ()
 //   const router = useRouter()
@@ -11,6 +14,7 @@ export default function useSignUpClerk({email, password, username}) {
   // Handle submission of sign-up form
   const onSignUp = async () => {
     if (!isLoaded) return
+    setLoading(true)
 
     // Start sign-up process using email and password provided
     try {
@@ -30,6 +34,8 @@ export default function useSignUpClerk({email, password, username}) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -58,8 +64,10 @@ export default function useSignUpClerk({email, password, username}) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
+      toast.error("Error: Something went wrong", {style: style})
+
     }
   }
 
-  return {pending: pendingVerification, onSignUp, onVerify}
+  return {pending: pendingVerification, onSignUp, onVerify, loading}
 }

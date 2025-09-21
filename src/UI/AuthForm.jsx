@@ -32,8 +32,8 @@ export default function AuthForm({type="signin"}) {
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
     const [code, setCode] = useState("")
-    const {onSignUp, onVerify, pending} = useSignUpClerk({email, password, username})
-    const {onSignIn, } = useSignInClerk({email, password})
+    const {onSignUp, onVerify, pending, loading: signupLoading} = useSignUpClerk({email, password, username})
+    const {onSignIn, loading: loginLoading} = useSignInClerk({email, password})
 
     async function handleFormSubmit(e){
         e.preventDefault(); 
@@ -75,7 +75,9 @@ export default function AuthForm({type="signin"}) {
             <Input value={email} onChange={setEmail} type="email" placeholder="example@gmail.com" />
             <Input value={password} onChange={setPassword} type="password" placeholder="password" />
         </>}
-        <input  type="submit" value={type === "signin" ? "SIGN IN" : type === "signup" ? "REGISTER" : "VERIFY"} className="border border-gray-300 rounded-lg font-bold py-6 text-xl mt-4 bg-green-800 text-green-50 hover:bg-green-700 cursor-pointer" />
+        <input disabled={signupLoading || loginLoading} type="submit" 
+            value={type === "signin" ? "SIGN IN" : type === "signup" ? "REGISTER" : "VERIFY"} 
+            className={`border border-gray-300 rounded-lg font-bold py-6 text-xl mt-4 ${loginLoading || signupLoading ? "bg-inherit border-dashed border-gray-600 text-gray-800 cursor-wait" : "bg-green-800 hover:bg-green-700"}  text-green-50  cursor-pointer`} />
         <div className='flex justify-center w-full text-xl mt-4'>
             <p>{type === "signin" ? <span>Don't have an account ? 
                 <span onClick={()=>setFormType("signup")} className='text-green-600 font-bold cursor-pointer '> Register</span></span> :

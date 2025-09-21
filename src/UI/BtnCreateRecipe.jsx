@@ -2,10 +2,11 @@ import React from 'react'
 import { useAppProvider } from '../context/appProvider'
 
 export default function BtnCreateRecipe() {
-    const {openModal, setOpenModal, setModalContent} = useAppProvider()
+    const {openModal, setOpenModal, setModalContent, setOpenMobileNav} = useAppProvider()
     function handleOpenModal(){
         setOpenModal(!openModal)
         setModalContent("modal-add-recipe")
+        setOpenMobileNav(false)
     }
   return (
     <li className="flex items-center">

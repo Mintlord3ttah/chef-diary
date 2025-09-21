@@ -68,16 +68,17 @@ export default function SearchRecipe() {
             }, 10000)
         }
         
-        !inputFocus && !isTyping && !openModal && setSearchStr(randVal)
+        !inputFocus && !isTyping && !openModal ? 
+        setSearchStr(randVal) : clearTimeout(timer)
         changeIndex()
-        return () => inputFocus && clearTimeout(timer)
+        return () => clearTimeout(timer)
     },[index, searchStr, inputFocus, isTyping, openModal])
 
+    console.log({searchStr})
 
-
-    return (<label htmlFor="" className="w-full flex shadow-2xl bg-white p-1">
+    return (<label htmlFor="" className="w-full flex shadow-2xl bg-white p-1 ">
         <input onFocus={handleInputFocus} onBlur={handleInputBlur} onChange={handleSearch} className={`${shouldStartAnim &&  "text-fade-animation"} ${inputFocus && "text-green-950"} search-field text-2xl`} type="text" value={searchStr} />
-        <div onClick={shouldSearch} className="cstm-search-btn glow-button w-fit px-6 h-full bg-green-950 flex gap-4 items-center cursor-pointer justify-center text-green-300 font-bold text-4xl">
+        <div onClick={shouldSearch} className="cstm-search-btn glow-button w-fit px-6 h-full bg-green-950 flex gap-4 items-center cursor-pointer justify-center text-green-300 font-bold text-4xl max-[440px]:text-3xl">
             <ion-icon name="search-outline"></ion-icon>
             <span> Search</span>
             </div>
